@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
   const { logout, user } = useAuth();
+  console.log(user);
   const navLinks = (
     <>
       <li>
@@ -36,9 +37,9 @@ const Navbar = () => {
               ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
               : "text-gray-500"
           }
-          to="/"
+          to="/x"
         >
-          My Volunteer Request Post
+          My
         </NavLink>
       </li>
 
@@ -87,7 +88,7 @@ const Navbar = () => {
           to="/"
           className="btn btn-ghost text-2xl font-bold text-orange-500"
         >
-          VolunteerBD
+          মন ও গল্প
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
