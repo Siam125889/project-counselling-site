@@ -8,8 +8,12 @@ import "swiper/css/navigation";
 
 import "./styles.css";
 
+import img1 from "../../assets/1.jpg";
+import img2 from "../../assets/2.jpg";
+import img3 from "../../assets/3.jpg";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import Hero from "../Hero/Hero";
 
 export default function Banner() {
   return (
@@ -26,32 +30,23 @@ export default function Banner() {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper w-11/12 lg:w-full mx-auto"
+        className="mySwiper h-screen"
       >
         <SwiperSlide>
-          <div>
-            <img
-              src="https://www.shutterstock.com/image-photo/happy-woman-during-successful-psychotherapy-600nw-2044804919.jpg"
-              alt=""
-              className="min-h-screen"
-            />
+          <div className="min-h-screen max-h-screen min-w-full">
+            <Hero img={img1}></Hero>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          {" "}
-          <img
-            src="https://png.pngtree.com/thumb_back/fh260/background/20220603/pngtree-happy-teacher-holding-page-showing-counselling-courses-classroom-mental-health-career-photo-image_13798634.jpg"
-            alt=""
-            className="min-h-screen"
-          />
+          <div className="min-h-screen max-h-screen min-w-full">
+            <Hero img={img2}></Hero>
+          </div>
         </SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        <SwiperSlide>
+          <div className="min-h-screen max-h-screen min-w-full">
+            <Hero img={img3}></Hero>
+          </div>
+        </SwiperSlide>
       </Swiper>
     </>
   );

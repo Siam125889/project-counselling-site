@@ -21,7 +21,7 @@ const Register = () => {
       });
   };
   return (
-    <div className="hero min-h-screen bg-orange-100 mt-4 rounded-xl">
+    <div className="mt-0 hero min-h-screen bg-orange-100 rounded-xl">
       <div className="hero-content flex-col lg:flex-row">
         <div className="text-center lg:text-left">
           <img

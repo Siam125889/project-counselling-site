@@ -1,9 +1,30 @@
+import { useRef, useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
   const { logout, user } = useAuth();
-  console.log(user);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const handleToggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const navLinks = (
     <>
       <li>
@@ -11,7 +32,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
-              : "text-gray-500"
+              : "text-gray-700"
           }
           to="/"
         >
@@ -23,7 +44,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
-              : "text-gray-500"
+              : "text-gray-700"
           }
           to="/about"
         >
@@ -35,7 +56,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
-              : "text-gray-500"
+              : "text-gray-700"
           }
           to="/x"
         >
@@ -48,7 +69,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
-              : "text-gray-500"
+              : "text-gray-700"
           }
           to="/register"
         >
@@ -57,11 +78,17 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
-    <div className="navbar bg-orange-200">
+    <div className="fixed bg-opacity-20 z-10 navbar bg-black">
       <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+        <div className="dropdown" ref={dropdownRef}>
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost lg:hidden"
+            onClick={handleToggleDropdown}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -77,18 +104,20 @@ const Navbar = () => {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            {navLinks}
-          </ul>
+          {isDropdownOpen && (
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              {navLinks}
+            </ul>
+          )}
         </div>
         <Link
           to="/"
           className="btn btn-ghost text-2xl font-bold text-orange-500"
         >
-          মন ও গল্প
+          Monogolpo
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -96,67 +125,43 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <div className="dropdown dropdown-end dropdown-hover ">
+          <div
+            className="dropdown dropdown-end dropdown-hover"
+            ref={dropdownRef}
+          >
             <div
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle avatar"
+              onClick={handleToggleDropdown}
             >
               <div className="w-10 rounded-full">
                 <img alt="user img" src={user?.photoURL} />
               </div>
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-0 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <p className="bg-orange-500 font-bold text-white mb-2 p-4">
-                  {user?.displayName || "No User Name"}
-                </p>
-              </li>
-
-              <li>
-                <button onClick={logout} className="btn">
-                  Logout
-                </button>
-              </li>
-            </ul>
+            {isDropdownOpen && (
+              <ul
+                tabIndex={0}
+                className="mt-0 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <p className="bg-orange-500 font-bold text-white mb-2 p-4">
+                    {user?.displayName || "No User Name"}
+                  </p>
+                </li>
+                <li>
+                  <button onClick={logout} className="btn">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
         ) : (
           <Link className="btn bg-orange-500 font-bold text-white" to="/login">
             Login
           </Link>
         )}
-      </div>
-      <div className="dropdown dropdown-end ">
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost bg-orange-500 text-white"
-        >
-          My Profile
-        </div>
-        <ul
-          tabIndex={0}
-          className="mt-0 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-        >
-          <li>
-            <Link to="/addvolunteerpost">
-              <p className="bg-orange-500 font-bold text-white mb-2 p-4 rounded-xl">
-                Add Volunteer Post
-              </p>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/managemypost">
-              <p className="bg-orange-500 font-bold text-white mb-2 p-4 rounded-xl">
-                Manage My Post
-              </p>
-            </Link>
-          </li>
-        </ul>
       </div>
     </div>
   );

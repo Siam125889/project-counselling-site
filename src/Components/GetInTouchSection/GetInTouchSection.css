@@ -1,0 +1,53 @@
+.get-in-touch-container {
+  padding: 60px 20px;
+  background-color: #ffefd5; /* Light orange background */
+  text-align: center;
+}
+
+.get-in-touch-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333; /* Darker black for the title */
+}
+
+.get-in-touch-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #333; /* Darker black for the subtitle */
+}
+
+.get-in-touch-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.get-in-touch-input,
+.get-in-touch-textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333; /* Black text for input fields */
+}
+
+.get-in-touch-textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.get-in-touch-button {
+  background-color: #ff8c00; /* Dark orange button */
+  color: black;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.get-in-touch-button:hover {
+  background-color: #e67600; /* Slightly darker orange on hover */
+}
