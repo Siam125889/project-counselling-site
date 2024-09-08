@@ -58,6 +58,19 @@ const Navbar = () => {
               ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
               : "text-gray-700"
           }
+          to="/admin-login"
+        >
+          Admin Login
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
+              : "text-gray-700"
+          }
           to="/x"
         >
           My
@@ -74,6 +87,18 @@ const Navbar = () => {
           to="/register"
         >
           Register
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-500 border border-orange-500 font-bold px-4 py-2 rounded-lg"
+              : "text-gray-700"
+          }
+          to="/admin"
+        >
+          Admin Dashboard
         </NavLink>
       </li>
     </>
